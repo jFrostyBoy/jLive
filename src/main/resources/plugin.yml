@@ -1,0 +1,14 @@
+name: jLive
+version: '1.0'
+main: jfbdev.jLive.jLive
+api-version: '1.21'
+authors: [ jFrostyBoy ]
+commands:
+  live:
+    usage: /<command> [url link]
+    description: Let players know about your stream
+    default: op
+  jlivereload:
+    usage: /<command>
+    description: Reloads the plugin configuration
+    default: op
