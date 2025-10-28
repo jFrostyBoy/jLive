@@ -1,5 +1,11 @@
 prefix: "&b[jLive] &f"
 cooldown: 60 # in seconds
+
+sound:
+  name: "ENTITY_PLAYER_LEVELUP"
+  volume: 1.0
+  pitch: 1.0
+
 messages:
   console: "&fCommand &cnot executable &fon behalf of &cConsole"
   no-permission: "&fYou &cdon't have permission &fto use the command"
