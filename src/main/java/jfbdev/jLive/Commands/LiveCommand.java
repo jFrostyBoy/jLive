@@ -1,6 +1,8 @@
 package jfbdev.jLive.Commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,6 +28,10 @@ public class LiveCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
 
         String prefix = plugin.getConfig().getString("prefix", ".");
+
+        String soundName = plugin.getConfig().getString("sound.name", "ENTITY_PLAYER_LEVELUP");
+        float volume = (float) plugin.getConfig().getDouble("sound.volume", 1.0);
+        float pitch = (float) plugin.getConfig().getDouble("sound.pitch", 1.0);
 
         if (!(commandSender instanceof Player player)) {
             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("messages.console", ".")));
@@ -61,6 +67,12 @@ public class LiveCommand implements CommandExecutor {
         linkMessage = linkMessage.replace("%link%", link)
                 .replace("%player%", player.getName());
         plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', linkMessage));
+
+        Sound sound = Sound.valueOf(soundName.toUpperCase());
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            online.playSound(online.getLocation(), sound, volume, pitch);
+            return true;
+        }
         return true;
     }
 }
