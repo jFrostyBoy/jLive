@@ -40,6 +40,7 @@ sound:
 messages:
   console: "&fCommand &cnot executable &fon behalf of &cConsole"
   no-permission: "&fYou &cdon't have permission &fto use the command"
+  link-format: "&fThe link must start from &chttp:// &for &chttps://"
   usage: "&fUsage: &b/live [URL]"
   live-message: |
   
@@ -51,6 +52,7 @@ messages:
   ```
 
 <img width="1021" height="195" alt="зображення" src="https://github.com/user-attachments/assets/3b06d92c-2305-478f-9e08-cc2c7bc844e9" />
+
 
 
 
