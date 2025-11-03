@@ -9,6 +9,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -49,6 +53,11 @@ public class LiveCommand implements CommandExecutor {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("messages.usage", ".")));
             return true;
         }
+        String link = args[0];
+        if (!link.matches("^(https?://).+")) {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("messages.link-format", ".")));
+            return true;
+        }
         long cooldownTime = plugin.getConfig().getLong("cooldown", 60) * 1000;
         UUID playerUUID = player.getUniqueId();
         long currentTime = System.currentTimeMillis();
@@ -62,11 +71,22 @@ public class LiveCommand implements CommandExecutor {
             return true;
         }
         cooldown.put(playerUUID, currentTime);
-        String link = args[0];
-        String linkMessage = plugin.getConfig().getString("messages.live-message", ".");
-        linkMessage = linkMessage.replace("%link%", link)
+        String linkMessageConfig = plugin.getConfig().getString("messages.live-message", ".");
+        String formattedMessage = linkMessageConfig
+                .replace("%link%", link)
                 .replace("%player%", player.getName());
-        plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', linkMessage));
+
+        Component message = LegacyComponentSerializer.legacyAmpersand().deserialize(formattedMessage);
+        Component clickableLink = Component.text(link)
+                .color(NamedTextColor.BLUE)
+                .clickEvent(ClickEvent.openUrl(link));
+
+        message = message.replaceText(builder -> builder
+                .matchLiteral(link)
+                .once()
+                .replacement(clickableLink)
+        );
+        plugin.getServer().broadcast(message);
 
         Sound sound = Sound.valueOf(soundName.toUpperCase());
         for (Player online : Bukkit.getOnlinePlayers()) {
