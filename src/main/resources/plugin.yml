@@ -1,5 +1,5 @@
 name: jLive
-version: '1.2'
+version: '1.3'
 main: jfbdev.jLive.jLive
 api-version: '1.16'
 authors: [ jFrostyBoy ]
