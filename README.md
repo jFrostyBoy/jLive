@@ -7,7 +7,7 @@ A Minecraft server plugin that allows your players to notify others about their 
 ## 📝 Requirements
 
 - **Server core**: Paper
-- **Version**: 1.21.1+
+- **Version**: 1.16.5 - 1.21.10
 - **Java**: 21
 
 ---
@@ -51,6 +51,7 @@ messages:
   ```
 
 <img width="1021" height="195" alt="зображення" src="https://github.com/user-attachments/assets/3b06d92c-2305-478f-9e08-cc2c7bc844e9" />
+
 
 
 
