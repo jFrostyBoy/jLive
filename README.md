@@ -1,6 +1,6 @@
-# 📺 jLive
+# 📺 JLiveStream
 
-A Minecraft server plugin that allows your players to notify others about their live streams.
+Plugin to announce live streams, fully customizable.
 
 ---
 
@@ -8,19 +8,23 @@ A Minecraft server plugin that allows your players to notify others about their 
 
 - **Server core**: Paper
 - **Version**: 1.16.5 - 1.21.10
-- **Java**: 21
+- **Java**: 16-21
 
 ---
 
 ## 📜 Commands
 
 - **/live [URL]**
-    - **Description**: Send a stream notification
-    - **Permission**: `jlive.use`
+    - **Description**: Send a start stream notification
+    - **Permission**: `jlivestream.live`
 
-- **/jlivereload**
+- **/livestop**
+    - **Description**: Send a stop stream notification
+    - **Permission**: `jlivestream.stop`
+
+- **/jlivestreamreload**
     - **Description**: Reload plugin configuration
-    - **Permission**: `jlive.reload`
+    - **Permission**: `jlivestream.reload`
 
 ---
 
@@ -29,29 +33,60 @@ A Minecraft server plugin that allows your players to notify others about their 
 Full customization and operation of the plugin is configured in the configuration file (`config.yml`).
 
 ```yaml
-prefix: "&b[jLive] &f"
-cooldown: 60 # in seconds
+# Configuration plugin settings
+# Live Stream Announcements Plugin
+# Fully customizable messages and configurations
+
+# Prefix for all messages related to live streams
+prefix: "&b[jLiveStream] "
+# Cooldown time in seconds between live stream announcements
+cooldown: 60
 
 sound:
-  name: "ENTITY_PLAYER_LEVELUP"
-  volume: 1.0
-  pitch: 1.0
+  start:
+    name: "ENTITY_PLAYER_LEVELUP"
+    volume: 1.0
+    pitch: 2.0
+  stop:
+    name: "BLOCK_ANVIL_DESTROY"
+    volume: 1.0
+    pitch: 1.5
 
+# Messages related to live stream
+broadcast:
+  live:
+    # Message displayed when a player starts a live stream
+    started:
+      - " "
+      - "  &b%player% &fis now &blive!"
+      - "  &fWatch the stream here: &b%link%"
+      - " "
+
+    # Message displayed when a player ends a live stream
+    stopped:
+      - " "
+      - "  &b%player% &fhas &cended &ftheir &blive stream."
+      - "  &fThank you for watching! &bSee later!"
+      - " "
+
+# Messages displayed to players
 messages:
-  console: "&fCommand &cnot executable &fon behalf of &cConsole"
-  no-permission: "&fYou &cdon't have permission &fto use the command"
-  link-format: "&fThe link must start from &chttp:// &for &chttps://"
-  usage: "&fUsage: &b/live [URL]"
-  live-message: |
-  
-    &r  &b&n|&r  &fPlayer &b%player% &fis &bstreaming
-    &r  &b|  &fCome in: &b%link%
-    
-  cooldown-message: "&fPlease wait &c%cooldown% sec. &fbefore using again!"
-  reload: "&fPlugin configuration successfully &areloaded!"
+  only-player: "&fOnly &cplayers &fcan use this command."
+  no-permission: "&fYou &cdon't have &fpermission to use this command."
+  live-usage: "&fUsage: &b/live <url>"
+  livestop-usage: "&fUsage: &b/livestop"
+  invalid-link: "&fLink must start with &chttp:// &for &chttps://"
+  live-started: "&fYou have &astarted &fyour live stream! Use &c/livestop &fwhen you end."
+  already-live: "&fYou are &calready &flive! Use &c/livestop &fto end."
+  live-stopped: "&fYou have &cstopped &fyour live stream! &aThank you &ffor you streaming of us!"
+  not-live: "&fYou are &cnot currently &flive!"
+  cooldown-message: "&fYou must wait &c%cooldown% sec. &fbefore using this command again."
+  reload: "&fConfiguration has been successfully &areloaded!"
   ```
 
-<img width="1021" height="195" alt="зображення" src="https://github.com/user-attachments/assets/3b06d92c-2305-478f-9e08-cc2c7bc844e9" />
+<img width="1000" height="587" alt="image" src="https://github.com/user-attachments/assets/6017d2b5-d375-46eb-9a8b-72957e53beb6" />
+
+
 
 
 
