@@ -1,20 +1,49 @@
-prefix: "&b[jLive] &f"
-cooldown: 60 # in seconds
+# Configuration plugin settings
+# Live Stream Announcements Plugin
+# Fully customizable messages and configurations
+
+# Prefix for all messages related to live streams
+prefix: "&b[jLiveStream] "
+# Cooldown time in seconds between live stream announcements
+cooldown: 60
 
 sound:
-  name: "ENTITY_PLAYER_LEVELUP"
-  volume: 1.0
-  pitch: 1.0
+  start:
+    name: "ENTITY_PLAYER_LEVELUP"
+    volume: 1.0
+    pitch: 2.0
+  stop:
+    name: "BLOCK_ANVIL_DESTROY"
+    volume: 1.0
+    pitch: 1.5
 
+# Messages related to live stream
+broadcast:
+  live:
+    # Message displayed when a player starts a live stream
+    started:
+      - " "
+      - "  &b%player% &fis now &blive!"
+      - "  &fWatch the stream here: &b%link%"
+      - " "
+
+    # Message displayed when a player ends a live stream
+    stopped:
+      - " "
+      - "  &b%player% &fhas &cended &ftheir &blive stream."
+      - "  &fThank you for watching! &bSee later!"
+      - " "
+
+# Messages displayed to players
 messages:
-  console: "&fCommand &cnot executable &fon behalf of &cConsole"
-  no-permission: "&fYou &cdon't have permission &fto use the command"
-  link-format: "&fThe link must start from &chttp:// &for &chttps://"
-  usage: "&fUsage: &b/live [URL]"
-  live-message: |
-    
-    &r  &b&n|&r  &fPlayer &b%player% &fis &bstreaming
-    &r  &b|  &fCome in: &b%link%
-
-  cooldown-message: "&fPlease wait &c%cooldown% sec. &fbefore using again!"
-  reload: "&fPlugin configuration successfully &areloaded!"
+  only-player: "&fOnly &cplayers &fcan use this command."
+  no-permission: "&fYou &cdon't have &fpermission to use this command."
+  live-usage: "&fUsage: &b/live <url>"
+  livestop-usage: "&fUsage: &b/livestop"
+  invalid-link: "&fLink must start with &chttp:// &for &chttps://"
+  live-started: "&fYou have &astarted &fyour live stream! Use &c/livestop &fwhen you end."
+  already-live: "&fYou are &calready &flive! Use &c/livestop &fto end."
+  live-stopped: "&fYou have &cstopped &fyour live stream! &aThank you &ffor you streaming of us!"
+  not-live: "&fYou are &cnot currently &flive!"
+  cooldown-message: "&fYou must wait &c%cooldown% sec. &fbefore using this command again."
+  reload: "&fConfiguration has been successfully &areloaded!"
