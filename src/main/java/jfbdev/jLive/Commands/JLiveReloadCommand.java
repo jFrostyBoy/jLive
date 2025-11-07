@@ -1,4 +1,4 @@
-package jfbdev.jLive.Commands;
+package jfbdev.jlivestream.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,15 +19,15 @@ public class JLiveReloadCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        String prefix = plugin.getConfig().getString("prefix", ".");
+        String prefix = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("prefix", ""));
 
-        if (!sender.hasPermission("jlive.reload")) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("messages.no-permission", ".")));
+        if (!sender.hasPermission("jlivestream.reload")) {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("messages.no-permission", "")));
             return true;
         }
 
         plugin.reloadConfig();
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("messages.reload", ".")));
+        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("messages.reload", "")));
         return true;
     }
 }
